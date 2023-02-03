@@ -1,10 +1,10 @@
-#include <string>
-#include <ros/ros.h>
-#include <serial/serial.h>
-#include <std_msgs/String.h>
-#include <std_msgs/Empty.h>
-#include <std_msgs/UInt16.h>
-#include <std_msgs/Float32.h>
+#include "string"
+#include "ros/ros.h"
+#include "serial/serial.h"
+#include "std_msgs/String.h"
+#include "std_msgs/Empty.h"
+#include "std_msgs/UInt16.h"
+#include "std_msgs/Float32.h"
 #include <sensor_msgs/JointState.h>
 
 
@@ -31,17 +31,19 @@ void angle_write_callback(const sensor_msgs::JointState& msg)
 	ROS_INFO("%s", Gcode.c_str());
 	_serial.write(Gcode.c_str());
 	result.data = _serial.read(_serial.available());
+	
+	//ROS_INFO("seq: %d", msg->seq);   // 수신된 메시지를 표시하는 함수
 }
 
-int main(int argc, char** argv)
-{	
-	ros::init(argc, argv, "mirobot_write_node");//초기화, 노드이름(初始化，节点名称) "Mirobot_write_node"
+int main(int argc, char **argv) // Node Main Function
+{
+	ros::init(argc, argv, "topic_sub2"); 
 	ros::NodeHandle nh;
 
-	ros::Subscriber sub_angle = nh.subscribe("/joint_states", 1, angle_write_callback);//노드가 구독할 토픽을 지정하고 되돌리기 함수를 지정합니다(指定节点订阅的话题，并指定回调函数)
-	ros::Rate loop_rate(20);//주파수를 지정했습니다(指定了频率为)20Hz
+	ros::Subscriber sub_angle = nh.subscribe("/joint_states", 1, angle_write_callback);
+	ros::Rate loop_rate(20);//주파수를 지정 20Hz
 
-	try//로봇팔의 직렬 연결 시도(尝试连接机械臂的串口)
+	try//로봇팔의 직렬 연결 시도
 	{
 		_serial.setPort("/dev/ttyUSB0");
 		_serial.setBaudrate(115200);
@@ -71,5 +73,4 @@ int main(int argc, char** argv)
 	
 	return 0;
 }
-
 

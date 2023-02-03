@@ -11,14 +11,15 @@
     name="use_gui"
     value="$(arg gui)" />
   <node
-    name="joint_state_publisher"
-    pkg="joint_state_publisher"
-    type="joint_state_publisher" />
-  <node
-    name="robot_state_publisher"
-    pkg="robot_state_publisher"
-    type="robot_state_publisher" />
- <!--<node 
+    name="topic_pub"
+    pkg="mirobot_urdf_2"
+    type="topic_pub" />
+  <!--<node 
+    name="dumbase"
+    pkg="tf" 
+    type="static_transform_publisher"  
+    args="0 0 0 0 0 0 dummy base_link 100" />
+  <node 
     name="baselink1"
     pkg="tf" 
     type="static_transform_publisher"  
@@ -49,9 +50,12 @@
     type="static_transform_publisher"  
     args="0 -0.01628 0.010525 0 0 -1.5708 Link5 Link6 100" />-->
   <node
+    name="topic_sub"
+    pkg="mirobot_urdf_2"
+    type="topic_sub" />  
+  <node
     name="rviz"
     pkg="rviz"
     type="rviz"
     args="-d $(find mirobot_urdf_2)/urdf.rviz" />
-  <node name="mirobot_write_node" pkg="mirobot_urdf_2" type="mirobot_write_node" />
 </launch>

@@ -1,0 +1,9 @@
+Header header
+uint32 seq
+time stamp
+string frame_id
+
+string[] name
+float64[] position
+float64[] velocity
+float64[] effort
