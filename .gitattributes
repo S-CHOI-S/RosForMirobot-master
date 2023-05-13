@@ -1,0 +1,8 @@
+* linguist-vendored
+*.cpp linguist-vendored=false
+*.py linguist-vendored=false
+*.html linguist-vendored=false
+*.cs linguist-vendored=false
+*.c linguist-vendored=false
+*.txt linguist-vendored=false
+*.cmake linguist-vendored=false
